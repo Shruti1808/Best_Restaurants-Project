@@ -44,8 +44,9 @@ namespace BestRestaurants
         Restaurant newRestaurant = (Restaurant) otherRestaurant;
         bool idEquality = (this.GetId() == newRestaurant.GetId());
         bool nameEquality = (this.GetRestaurantName() == newRestaurant.GetRestaurantName());
+        bool cuisineIdEquality = (this.GetCuisineId() == newRestaurant.GetCuisineId());
 
-        return (idEquality && nameEquality);
+        return (idEquality && nameEquality && cuisineIdEquality);
       }
     }
 
@@ -79,7 +80,7 @@ namespace BestRestaurants
         string restaurantName = rdr.GetString(1);
         int cuisineId = rdr.GetInt32(2);
 
-        Restaurant newRestaurant = new Restaurant(restaurantName, cuisineId);
+        Restaurant newRestaurant = new Restaurant(restaurantName, cuisineId, id);
         allRestaurants.Add(newRestaurant);
       }
 
@@ -100,23 +101,25 @@ namespace BestRestaurants
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (restaurant_name,cuisine_id) OUTPUT INSERTED.id VALUES(@RestaurantName,@CuisineId);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (restaurant_name, cuisine_id) OUTPUT INSERTED.id VALUES(@RestaurantName, @CuisineId);", conn);
 
       SqlParameter restaurantNameParameter = new SqlParameter();
-      SqlParameter cuisineIdParameter = new SqlParameter();
-
       restaurantNameParameter.ParameterName = "@RestaurantName";
-      cuisineIdParameter.ParameterName = "@CuisineId";
       restaurantNameParameter.Value = this.GetRestaurantName();
-      cuisineIdParameter.Value = this.GetCuisineId().ToString();
-      cmd.Parameters.Add(restaurantNameParameter,cuisineIdParameter);
+
+      SqlParameter cuisineIdParameter = new SqlParameter();
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      cuisineIdParameter.Value = this.GetCuisineId();
+
+      cmd.Parameters.Add(restaurantNameParameter);
+      cmd.Parameters.Add(cuisineIdParameter);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
       {
         this._id = rdr.GetInt32(0);
-        // this._cuisineName = rdr.GetString(1);
+
       }
       if (rdr != null)
       {

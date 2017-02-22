@@ -47,7 +47,7 @@ namespace BestRestaurants
       testRestaurant.Save();
       List<Restaurant> actualResult = Restaurant.GetAll();
       List<Restaurant> expectedResult = new List<Restaurant>{testRestaurant};
-
+      
       //Assert
       Assert.Equal(expectedResult, actualResult);
     }

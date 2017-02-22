@@ -1,11 +1,11 @@
 @{
   Layout="Shared/_Layout.cshtml";
 }
-<h1>Working!</h1>
+<h1>Best Restaurants in Town</h1>
 <ul>
   @foreach(var cuisine in @Model)
   {
-    <li>@cuisine.GetCuisineName()</li>
+    <li><a href="/cuisines/@cuisine.GetId()">@cuisine.GetCuisineName()</a></li>
   }
 </ul>
 <form action="/cuisine/new" method="post">

@@ -13,6 +13,7 @@ namespace BestRestaurants
         List<Cuisine> allCuisines = Cuisine.GetAll();
         return View["index.cshtml", allCuisines];
       };
+
       Post["/cuisine/new"] =_=> {
         string newCuisineName = Request.Form["cuisine-name"];
         Cuisine newCuisine = new Cuisine(newCuisineName);
@@ -20,6 +21,12 @@ namespace BestRestaurants
         List<Cuisine> allCuisines = Cuisine.GetAll();
         return View["index.cshtml", allCuisines];
       };
+      
+      Get["/cuisines/{id}"] = parameters => {
+        Cuisine clickedCuisine = Cuisine.Find(parameters.id);
+        return View["cuisine.cshtml", clickedCuisine];
+      };
+
     }
   }
 }

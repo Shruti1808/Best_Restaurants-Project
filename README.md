@@ -71,6 +71,14 @@ This website will let users enter and save movies along with affiliated actors a
 * Example Input: *cheap clicky*
 * Example Output: "French Cuisine Restaurants: only the cheap ones"
 
+**The user cannot add a duplicate cuisine**
+* Example Input: "French Cuisine"
+* Example Output: "Error: This cuisine is already on the list"
+
+**The user cannot add a duplicate restaurant**
+* Example Input: "Le Fromage"
+* Example Output: "Error: This restaurant is already on the list"
+
 ## Support and contact details
 
 Please contact Allie Holcombe at alexandra.holcombe@gmail.com, Renee Mei at dontemailme@dontemailme.com, or Shruti Priya at shrutipriya1808@gmail.com with any questions, concerns, or suggestions.

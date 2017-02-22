@@ -36,5 +36,20 @@ namespace BestRestaurants
 
       Assert.Equal(firstRestaurantName, secondRestaurantName);
     }
+
+    [Fact]
+    public void Test_Save_SavesToDataBase()
+    {
+      //Arrange
+      Restaurant testRestaurant = new Restaurant("French Restaurant",1);
+
+      //Act
+      testRestaurant.Save();
+      List<Restaurant> actualResult = Restaurant.GetAll();
+      List<Restaurant> expectedResult = new List<Restaurant>{testRestaurant};
+
+      //Assert
+      Assert.Equal(expectedResult, actualResult);
+    }
   }
 }

@@ -94,5 +94,38 @@ namespace BestRestaurants
 
       return allRestaurants;
     }
+
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (restaurant_name,cuisine_id) OUTPUT INSERTED.id VALUES(@RestaurantName,@CuisineId);", conn);
+
+      SqlParameter restaurantNameParameter = new SqlParameter();
+      SqlParameter cuisineIdParameter = new SqlParameter();
+
+      restaurantNameParameter.ParameterName = "@RestaurantName";
+      cuisineIdParameter.ParameterName = "@CuisineId";
+      restaurantNameParameter.Value = this.GetRestaurantName();
+      cuisineIdParameter.Value = this.GetCuisineId().ToString();
+      cmd.Parameters.Add(restaurantNameParameter,cuisineIdParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+        // this._cuisineName = rdr.GetString(1);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
   }
 }

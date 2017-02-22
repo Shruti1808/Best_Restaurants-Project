@@ -80,5 +80,22 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(testRestaurant, foundRestaurant);
     }
+
+    [Fact]
+    public void Test_DeleteRestaurant_DeleteRestaurantFromDatabase()
+    {
+      //Arrange
+      Restaurant testRestaurant = new Restaurant("Le Fromage", 1);
+
+      //Act
+      testRestaurant.Save();
+      testRestaurant.DeleteRestaurant();
+
+      //Assert
+      List<Restaurant> expectedResult = new List<Restaurant>{};
+      List<Restaurant> actualResult = Restaurant.GetAll();
+
+      Assert.Equal(expectedResult, actualResult);
+    }
   }
 }

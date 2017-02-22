@@ -88,6 +88,7 @@ namespace BestRestaurants
       Cuisine testCuisine = new Cuisine("French Cuisine");
 
       //Act
+      testCuisine.Save();
       testCuisine.DeleteCuisine();
 
       //Assert

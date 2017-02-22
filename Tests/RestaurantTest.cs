@@ -66,5 +66,19 @@ namespace BestRestaurants
 
       Assert.Equal(expectedResult, actualResult);
     }
+
+    [Fact]
+    public void Test_Find_FindsRestaurantInDatabase()
+    {
+      //Arrange
+      Restaurant testRestaurant = new Restaurant("Le Fromage", 1);
+      testRestaurant.Save();
+
+      //Act
+      Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
+
+      //Assert
+      Assert.Equal(testRestaurant, foundRestaurant);
+    }
   }
 }

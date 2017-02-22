@@ -27,5 +27,14 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(0,result);
     }
+
+    [Fact]
+    public void Test_EqualOverrideTrueIfRestaurantNameIsSame()
+    {
+      Restaurant firstRestaurantName = new Restaurant("Le Fromage", 1);
+      Restaurant secondRestaurantName = new Restaurant("Le Fromage", 1);
+
+      Assert.Equal(firstRestaurantName, secondRestaurantName);
+    }
   }
 }

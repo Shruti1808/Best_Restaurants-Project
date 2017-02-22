@@ -18,6 +18,42 @@ namespace BestRestaurants
       _cuisineId = cuisineId;
     }
 
+    public int GetId()
+    {
+      return _id;
+    }
+
+    public string GetRestaurantName()
+    {
+      return _restaurantName;
+    }
+
+    public int GetCuisineId()
+    {
+      return _cuisineId;
+    }
+
+    public override bool Equals(System.Object otherRestaurant)
+    {
+      if(!(otherRestaurant is Restaurant))
+      {
+        return false;
+      }
+      else
+      {
+        Restaurant newRestaurant = (Restaurant) otherRestaurant;
+        bool idEquality = (this.GetId() == newRestaurant.GetId());
+        bool nameEquality = (this.GetRestaurantName() == newRestaurant.GetRestaurantName());
+
+        return (idEquality && nameEquality);
+      }
+    }
+
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
+    }
+
     public static void DeleteAll()
     {
       SqlConnection connection = DB.Connection();

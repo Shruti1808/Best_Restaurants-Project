@@ -38,7 +38,7 @@ namespace BestRestaurants
     }
 
     [Fact]
-    public void Test_Save_AssignsIdToObjects()
+    public void Test_Save_SavesToDataBase()
     {
       //Arrange
       Cuisine testCuisine = new Cuisine("French Cuisine");
@@ -50,6 +50,35 @@ namespace BestRestaurants
 
       //Assert
       Assert.Equal(expectedResult, actualResult);
+    }
+
+    [Fact]
+    public void Test_Save_AssignIdToObjects()
+    {
+      //Arrange
+      Cuisine testCuisine = new Cuisine("French Cuisine");
+
+      testCuisine.Save();
+      Cuisine savedCuisine = Cuisine.GetAll()[0];
+
+      int result = savedCuisine.GetId();
+      int testId = testCuisine.GetId();
+
+      Assert.Equal(testId, result);
+    }
+
+    [Fact]
+    public void Test_Find_FindsCuisineInDatabase()
+    {
+      //Arrange
+      Cuisine testCuisine = new Cuisine("French Cuisine");
+      testCuisine.Save();
+
+      //Act
+      Cuisine foundCuisine = Cuisine.Find(testCuisine.GetId());
+
+      //Assert
+      Assert.Equal(testCuisine, foundCuisine);
     }
   }
 }

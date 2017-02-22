@@ -97,5 +97,22 @@ namespace BestRestaurants
 
       Assert.Equal(expectedResult, actualResult);
     }
+
+    [Fact]
+    public void Test_Update_UpdateRestaurantInDatabase()
+    {
+      string RestaurantName = "Le Rmoges";
+      Restaurant testRestaurant = new Restaurant(RestaurantName, 2);
+      testRestaurant.Save();
+
+      string newRestaurantName ="Le Fromage";
+      int newCuisineId = 1;
+
+      testRestaurant.Update(newRestaurantName, newCuisineId);
+      Restaurant actualResult = testRestaurant;
+      Restaurant expectedResult = new Restaurant(newRestaurantName, newCuisineId);
+
+      Assert.Equal(expectedResult,actualResult);
+    }
   }
 }

@@ -31,6 +31,11 @@ namespace BestRestaurants
       _cuisineName = newCuisineName;
     }
 
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
+    }
+
     public static void DeleteAll()
     {
       SqlConnection connection = DB.Connection();

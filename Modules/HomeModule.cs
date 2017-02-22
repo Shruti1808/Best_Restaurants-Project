@@ -21,10 +21,22 @@ namespace BestRestaurants
         List<Cuisine> allCuisines = Cuisine.GetAll();
         return View["index.cshtml", allCuisines];
       };
-      
+
       Get["/cuisines/{id}"] = parameters => {
-        Cuisine clickedCuisine = Cuisine.Find(parameters.id);
-        return View["cuisine.cshtml", clickedCuisine];
+        Cuisine currentCuisine = Cuisine.Find(parameters.id);
+        return View["cuisine.cshtml", currentCuisine];
+      };
+
+      Get["/cuisines/delete/{id}"] = parameters => {
+        Cuisine currentCuisine = Cuisine.Find(parameters.id);
+        return View["cuisine_delete.cshtml", currentCuisine];
+      };
+
+      Delete["/cuisines/delete/{id}"] = parameters => {
+        Cuisine currentCuisine = Cuisine.Find(parameters.id);
+        currentCuisine.DeleteCuisine();
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        return View["index.cshtml", allCuisines];
       };
 
     }

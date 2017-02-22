@@ -155,5 +155,16 @@ namespace BestRestaurants
 
       return foundCuisine;
     }
+
+    public void DeleteCuisine()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM cuisines WHERE id = @CuisineId;", conn);
+      cmd.Parameters.Add(new SqlParameter("@CuisineId", this.GetId()));
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
   }
 }

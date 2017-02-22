@@ -39,6 +39,17 @@ namespace BestRestaurants
         return View["index.cshtml", allCuisines];
       };
 
+      Get["/cuisines/update/{id}"] = parameters => {
+        Cuisine currentCuisine = Cuisine.Find(parameters.id);
+        return View["cuisine_update.cshtml",currentCuisine];
+      };
+
+      Patch["/cuisines/update/{id}"] = parameters => {
+        Cuisine currentCuisine = Cuisine.Find(parameters.id);
+        currentCuisine.Update(Request.Form["cuisine-name"]);
+        return View ["cuisine.cshtml", currentCuisine];
+      };
+
     }
   }
 }

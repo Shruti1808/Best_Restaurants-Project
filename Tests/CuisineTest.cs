@@ -27,5 +27,14 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(0,result);
     }
+
+    [Fact]
+    public void Test_EqualOverrideTrueIfCuisineNameIsSame()
+    {
+      Cuisine firstCuisineName = new Cuisine("French cuisine");
+      Cuisine secondCuisineName = new Cuisine("French cuisine");
+
+      Assert.Equal(firstCuisineName,secondCuisineName);
+    }
   }
 }

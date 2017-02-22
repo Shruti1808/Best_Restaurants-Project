@@ -16,6 +16,21 @@ namespace BestRestaurants
       _cuisineName = cuisineName;
     }
 
+    public int GetId()
+    {
+      return _id;
+    }
+
+    public string GetCuisineName()
+    {
+      return _cuisineName;
+    }
+
+    public void SetCuisineName(string newCuisineName)
+    {
+      _cuisineName = newCuisineName;
+    }
+
     public static void DeleteAll()
     {
       SqlConnection connection = DB.Connection();
@@ -52,9 +67,24 @@ namespace BestRestaurants
       {
         connection.Close();
       }
-      
-      return allCuisines;
 
+      return allCuisines;
+    }
+
+    public override bool Equals(System.Object otherCuisine)
+    {
+      if (!(otherCuisine is Cuisine))
+      {
+        return false;
+      }
+      else
+      {
+        Cuisine newCuisine = (Cuisine) otherCuisine;
+        bool idEquality = (this.GetId()== newCuisine.GetId());
+        bool nameEquality = (this.GetCuisineName()== newCuisine.GetCuisineName());
+
+        return (idEquality && nameEquality);
+      }
     }
   }
 }

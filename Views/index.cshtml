@@ -1,0 +1,15 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+<h1>Working!</h1>
+<ul>
+  @foreach(var cuisine in @Model)
+  {
+    <li>@cuisine.GetCuisineName()</li>
+  }
+</ul>
+<form action="/cuisine/new" method="post">
+  <label for="cuisine-name">Enter New Cuisine:</label>
+  <input type="text" name="cuisine-name">
+  <button type="submit">Add</button>
+</form>

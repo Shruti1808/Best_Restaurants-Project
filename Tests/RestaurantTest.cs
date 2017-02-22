@@ -47,8 +47,23 @@ namespace BestRestaurants
       testRestaurant.Save();
       List<Restaurant> actualResult = Restaurant.GetAll();
       List<Restaurant> expectedResult = new List<Restaurant>{testRestaurant};
-      
+
       //Assert
+      Assert.Equal(expectedResult, actualResult);
+    }
+
+    [Fact]
+    public void Test_Save_AssignIdToObjects()
+    {
+      //Arrange
+      Restaurant testRestaurant = new Restaurant("Cactus", 2);
+
+      testRestaurant.Save();
+      Restaurant savedRestaurant = Restaurant.GetAll()[0];
+
+      int expectedResult = testRestaurant.GetId();
+      int actualResult = savedRestaurant.GetId();
+
       Assert.Equal(expectedResult, actualResult);
     }
   }

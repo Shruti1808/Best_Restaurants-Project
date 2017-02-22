@@ -96,5 +96,24 @@ namespace BestRestaurants
 
       Assert.Equal(expectedResult, actualResult);
     }
+
+    [Fact]
+    public void Test_Update_UpdatesCuisineInDatabase()
+    {
+      //Arrange
+      string CuisineName = "French Food";
+      Cuisine testCuisine = new Cuisine(CuisineName);
+      testCuisine.Save();
+
+      string newCuisineName = "French Cuisine";
+
+      //Act
+      testCuisine.Update(newCuisineName);
+      string actualResult = testCuisine.GetCuisineName();
+      string expectedResult = "French Cuisine";
+
+      //Assert
+      Assert.Equal(expectedResult,actualResult);
+    }
   }
 }

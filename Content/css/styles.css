@@ -1,0 +1,52 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body{
+    background-color: #575c63;
+    height: 100%;
+}
+
+#left h1 {
+  font-family: 'Unica One', cursive;
+  text-align: center;
+  font-size: 65px;
+  padding: 0;
+  text-transform: lowercase;
+  background-image: url("../img/redfork.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+  padding-top: 26%;
+  margin-top: 30vh;
+}
+
+.col-md-4 {
+  padding: 0;
+  text-align: center;
+}
+
+.col-md-4 img {
+  width: 80%;
+}
+
+#right {
+  border: 2px red solid;
+}
+
+.container {
+  width: 50%;
+  max-width: 900px;
+  margin-left: 15%;
+  background-color: #fff;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  overflow:hidden;
+  z-index:-1;
+  padding: 0;
+}

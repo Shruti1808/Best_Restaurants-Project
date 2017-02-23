@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
+  <link rel="stylesheet" href="Content/css/styles.css">
+  <title>Best Restaurants</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4" id="left">
+        <h1>Fork This</h1>
+        <!-- <img src="Content/img/redfork.png" alt=""> -->
+      </div>
+
+      <div class="col-md-8" id="right">
+        <h1>Best Restaurants in Town</h1>
+        <ul>
+          @foreach(var cuisine in @Model)
+          {
+            <li><a href="/cuisines/@cuisine.GetId()">@cuisine.GetCuisineName()</a></li>
+          }
+        </ul>
+        <form action="/cuisine/new" method="post">
+          <label for="cuisine-name">Enter New Cuisine:</label>
+          <input type="text" name="cuisine-name">
+          <button type="submit">Add</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

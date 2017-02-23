@@ -23,14 +23,17 @@
   </select>
   <label for="restaurant-close-time">Close Time:</label>
   <select name="restaurant-close-time">
-    @for (int i = 1; i <= 12; i++)
+
+    @for (int i = 1; i < 12 12; i++)
     {
       <option value="@i AM">@i AM</option>
     }
-    @for (int i = 1; i <= 12; i++)
+    <option value="12 PM">12 PM</option>
+    @for (int i = 1; i < 12; i++)
     {
       <option value="@i PM">@i PM</option>
     }
+    <option value="12 AM">12 AM</option>
   </select>
   <button type="submit" name="button">Add Restaurant</button>
 </form>

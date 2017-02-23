@@ -178,5 +178,69 @@ namespace BestRestaurants
       cmd.ExecuteNonQuery();
       conn.Close();
     }
+
+    public void Update(string newRestaurantName = null, int newCuisineId = 0)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      //new command to change any changed fields
+      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET restaurant_name = @newRestaurantName, cuisine_id = @newCuisineId OUTPUT INSERTED.restaurant_name, INSERTED.cuisine_id WHERE id = @RestaurantId;", conn);
+
+      //Get id of restaurant to use in command
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(restaurantIdParameter);
+
+      //CHANGE RESTAURANT NAME
+      SqlParameter newRestaurantNameParameter = new SqlParameter();
+      newRestaurantNameParameter.ParameterName = "@newRestaurantName";
+
+      //If there is a new restaurant name, change it
+      if (newRestaurantName != null)
+      {
+        newRestaurantNameParameter.Value = newRestaurantName;
+      }
+      //if there isn't a new restaurant name, don't change the name
+      else
+      {
+        newRestaurantNameParameter.Value = this.GetRestaurantName();
+      }
+      cmd.Parameters.Add(newRestaurantNameParameter);
+
+      //CHANGE CUISINE ID
+      SqlParameter newCuisineIdParameter = new SqlParameter();
+      newCuisineIdParameter.ParameterName = "@newCuisineId";
+
+      //If there is a new restaurant name, change it
+      if (newCuisineId != 0)
+      {
+        newCuisineIdParameter.Value = newCuisineId;
+      }
+      //if there isn't a new restaurant name, don't change the name
+      else
+      {
+        newCuisineIdParameter.Value = this.GetCuisineId();
+      }
+      cmd.Parameters.Add(newCuisineIdParameter);
+
+      //execute reader
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while (rdr.Read())
+      {
+        this._restaurantName = rdr.GetString(0);
+        this._cuisineId = rdr.GetInt32(1);
+      }
+      if(rdr!= null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
   }
 }

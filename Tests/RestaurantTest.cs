@@ -110,7 +110,7 @@ namespace BestRestaurants
 
       testRestaurant.Update(newRestaurantName, newCuisineId);
       Restaurant actualResult = testRestaurant;
-      Restaurant expectedResult = new Restaurant(newRestaurantName, newCuisineId);
+      Restaurant expectedResult = new Restaurant(newRestaurantName, newCuisineId, testRestaurant.GetId());
 
       Assert.Equal(expectedResult,actualResult);
     }

@@ -1,0 +1,10 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<h1>@Model["restaurant"].GetRestaurantName()</h1>
+<h2>@Model["cuisine"].GetCuisineName()</h2>
+
+<p><a href="/cuisines/@Model["cuisine"].GetId()/restaurants/@Model["restaurant"].GetId()/delete">Delete </a></p>
+<p><a href="/cuisines/@Model["cuisine"].GetId()">Back to @Model["cuisine"].GetCuisineName()</a></p>
+<p><a href="/">Back to Homepage</a></p>

@@ -56,7 +56,7 @@ namespace BestRestaurants
       };
 
       Post["/cuisines/{id}/restaurants/new"] = parameters => {
-        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-name"], parameters.id, Request.Form["restaurant-address"], "8AM", "11PM");
+        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-name"], parameters.id, Request.Form["restaurant-address"], Request.Form["restaurant-open-time"], Request.Form["restaurant-close-time"]);
         newRestaurant.Save();
         return View["cuisine.cshtml", Cuisine.Find(parameters.id)];
       };
@@ -92,7 +92,7 @@ namespace BestRestaurants
 
       Patch["/cuisines/{cuisineId}/restaurants/{id}/update"] = parameters => {
         Restaurant currentRestaurant = Restaurant.Find(parameters.id);
-        currentRestaurant.Update(Request.Form["restaurant-name"], Request.Form["cuisine-name"], Request.Form["restaurant-address"], "8AM", "11PM");
+        currentRestaurant.Update(Request.Form["restaurant-name"], Request.Form["cuisine-name"], Request.Form["restaurant-address"], Request.Form["restaurant-open-time"], Request.Form["restaurant-close-time"]);
         Cuisine currentCuisine = Cuisine.Find(currentRestaurant.GetCuisineId());
         Dictionary<string, object> model = new Dictionary<string, object>{{"restaurant", currentRestaurant},{"cuisine", currentCuisine}};
         return View["restaurant_info.cshtml", model];

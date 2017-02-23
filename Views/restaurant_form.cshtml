@@ -9,6 +9,29 @@
   <input type="text" name="restaurant-name" id="restaurant-name">
   <label for="restaurant-address">Address:</label>
   <input type="text" name="restaurant-address" id="restaurant-address">
+
+  <label for="restaurant-open-time">Open Time:</label>
+  <select name="restaurant-open-time">
+    @for (int i = 1; i <= 12; i++)
+    {
+      <option value="@i AM">@i AM</option>
+    }
+    @for (int i = 1; i <= 12; i++)
+    {
+      <option value="@i PM">@i PM</option>
+    }
+  </select>
+  <label for="restaurant-close-time">Close Time:</label>
+  <select name="restaurant-close-time">
+    @for (int i = 1; i <= 12; i++)
+    {
+      <option value="@i AM">@i AM</option>
+    }
+    @for (int i = 1; i <= 12; i++)
+    {
+      <option value="@i PM">@i PM</option>
+    }
+  </select>
   <button type="submit" name="button">Add Restaurant</button>
 </form>
 

@@ -50,6 +50,16 @@ namespace BestRestaurants
         return View ["cuisine.cshtml", currentCuisine];
       };
 
+      Get["/cuisines/{id}/restaurants/new"] = parameters => {
+        Cuisine currentCuisine = Cuisine.Find(parameters.id);
+        return View["restaurant_form.cshtml", currentCuisine];
+      };
+
+      Post["/cuisines/{id}/restaurants/new"] = parameters => {
+        Restaurant newRestaurant = Restaurant(Request.Form["restaurant-name"], parameters.id);
+        newRestaurant.Save();
+        return View["cuisine.cshtml", Cuisine.Find(parameters.id)];
+      }
     }
   }
 }

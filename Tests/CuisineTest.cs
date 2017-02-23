@@ -116,5 +116,28 @@ namespace BestRestaurants
       //Assert
       Assert.Equal(expectedResult,actualResult);
     }
+
+    [Fact]
+    public void Test_GetRestaurants_ListsRestaurantsInCuisine()
+    {
+      //Arrange
+      Cuisine testCuisine = new Cuisine ("French Cuisine");
+      Restaurant firstRestaurant = new Restaurant("Le Fromage", 1);
+      Restaurant secondRestaurant = new Restaurant("Le Pichet", 1);
+      Restaurant thirdRestaurant = new Restaurant("La Menagerie", 1);
+
+      //Act
+      testCuisine.Save();
+      firstRestaurant.Save();
+      secondRestaurant.Save();
+      thirdRestaurant.Save();
+
+
+      //Assert
+      List<Restaurant> expectedResult = new List<Restaurant> {firstRestaurant, secondRestaurant, thirdRestaurant};
+      List<Restaurant> actualResult = testCuisine.GetRestaurants();
+
+      Assert.Equal(expectedResult, actualResult);
+    }
   }
 }

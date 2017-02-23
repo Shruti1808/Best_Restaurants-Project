@@ -10,11 +10,13 @@ namespace BestRestaurants
     private int _id;
     private string _restaurantName;
     private int _cuisineId;
+    private string _address;
 
-    public Restaurant(string restaurantName, int cuisineId, int Id = 0)
+    public Restaurant(string restaurantName, int cuisineId, string address, int Id = 0)
     {
       _id = Id;
       _restaurantName = restaurantName;
+      _address = address;
       _cuisineId = cuisineId;
     }
 
@@ -33,6 +35,11 @@ namespace BestRestaurants
       return _cuisineId;
     }
 
+    public string GetAddress()
+    {
+      return _address;
+    }
+
     public override bool Equals(System.Object otherRestaurant)
     {
       if(!(otherRestaurant is Restaurant))
@@ -45,8 +52,9 @@ namespace BestRestaurants
         bool idEquality = (this.GetId() == newRestaurant.GetId());
         bool nameEquality = (this.GetRestaurantName() == newRestaurant.GetRestaurantName());
         bool cuisineIdEquality = (this.GetCuisineId() == newRestaurant.GetCuisineId());
+        bool addressEquality = (this.GetAddress() == newRestaurant.GetAddress());
 
-        return (idEquality && nameEquality && cuisineIdEquality);
+        return (idEquality && nameEquality && cuisineIdEquality && addressEquality);
       }
     }
 
@@ -79,8 +87,9 @@ namespace BestRestaurants
         int id = rdr.GetInt32(0);
         string restaurantName = rdr.GetString(1);
         int cuisineId = rdr.GetInt32(2);
+        string address = rdr.GetString(3);
 
-        Restaurant newRestaurant = new Restaurant(restaurantName, cuisineId, id);
+        Restaurant newRestaurant = new Restaurant(restaurantName, cuisineId, address, id);
         allRestaurants.Add(newRestaurant);
       }
 
@@ -101,7 +110,7 @@ namespace BestRestaurants
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (restaurant_name, cuisine_id) OUTPUT INSERTED.id VALUES(@RestaurantName, @CuisineId);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO restaurants (restaurant_name, cuisine_id, address) OUTPUT INSERTED.id VALUES(@RestaurantName, @CuisineId, @Address);", conn);
 
       SqlParameter restaurantNameParameter = new SqlParameter();
       restaurantNameParameter.ParameterName = "@RestaurantName";
@@ -111,8 +120,13 @@ namespace BestRestaurants
       cuisineIdParameter.ParameterName = "@CuisineId";
       cuisineIdParameter.Value = this.GetCuisineId();
 
+      SqlParameter addressParameter = new SqlParameter();
+      addressParameter.ParameterName = "@Address";
+      addressParameter.Value = this.GetAddress();
+
       cmd.Parameters.Add(restaurantNameParameter);
       cmd.Parameters.Add(cuisineIdParameter);
+      cmd.Parameters.Add(addressParameter);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -145,6 +159,7 @@ namespace BestRestaurants
 
       int foundRestaurantId = 0;
       string foundRestaurantName = null;
+      string foundAddress = null;
       int foundCuisineId = 0;
 
       while (rdr.Read())
@@ -152,9 +167,10 @@ namespace BestRestaurants
         foundRestaurantId = rdr.GetInt32(0);
         foundRestaurantName = rdr.GetString(1);
         foundCuisineId = rdr.GetInt32(2);
+        foundAddress = rdr.GetString(3);
       }
 
-      Restaurant foundRestaurant = new Restaurant(foundRestaurantName, foundCuisineId, foundRestaurantId);
+      Restaurant foundRestaurant = new Restaurant(foundRestaurantName, foundCuisineId, foundAddress, foundRestaurantId);
 
       if (rdr != null)
       {
@@ -179,13 +195,13 @@ namespace BestRestaurants
       conn.Close();
     }
 
-    public void Update(string newRestaurantName = null, int newCuisineId = 0)
+    public void Update(string newRestaurantName = null, int newCuisineId = 0, string newAddress = null)
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
 
       //new command to change any changed fields
-      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET restaurant_name = @newRestaurantName, cuisine_id = @newCuisineId OUTPUT INSERTED.restaurant_name, INSERTED.cuisine_id WHERE id = @RestaurantId;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET restaurant_name = @newRestaurantName, cuisine_id = @newCuisineId, address = @newAddress OUTPUT INSERTED.restaurant_name, INSERTED.cuisine_id, INSERTED.address WHERE id = @RestaurantId;", conn);
 
       //Get id of restaurant to use in command
       SqlParameter restaurantIdParameter = new SqlParameter();
@@ -225,6 +241,22 @@ namespace BestRestaurants
       }
       cmd.Parameters.Add(newCuisineIdParameter);
 
+      //CHANGE ADDRESS
+      SqlParameter newAddressParameter = new SqlParameter();
+      newAddressParameter.ParameterName = "@newAddress";
+
+      //If there is a new restaurant name, change it
+      if (newAddress != null)
+      {
+        newAddressParameter.Value = newAddress;
+      }
+      //if there isn't a new restaurant name, don't change the name
+      else
+      {
+        newAddressParameter.Value = this.GetAddress();
+      }
+      cmd.Parameters.Add(newAddressParameter);
+
       //execute reader
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -232,6 +264,7 @@ namespace BestRestaurants
       {
         this._restaurantName = rdr.GetString(0);
         this._cuisineId = rdr.GetInt32(1);
+        this._address = rdr.GetString(2);
       }
       if(rdr!= null)
       {

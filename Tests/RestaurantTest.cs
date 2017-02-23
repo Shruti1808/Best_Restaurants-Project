@@ -29,10 +29,10 @@ namespace BestRestaurants
     }
 
     [Fact]
-    public void Test_EqualOverrideTrueIfRestaurantNameIsSame()
+    public void Test_EqualOverrideTrueIfRestaurantNameAddresssIdIsSame()
     {
-      Restaurant firstRestaurantName = new Restaurant("Le Fromage", 1);
-      Restaurant secondRestaurantName = new Restaurant("Le Fromage", 1);
+      Restaurant firstRestaurantName = new Restaurant("Le Fromage", 1, "24 Main St.");
+      Restaurant secondRestaurantName = new Restaurant("Le Fromage", 1, "24 Main St.");
 
       Assert.Equal(firstRestaurantName, secondRestaurantName);
     }
@@ -41,7 +41,7 @@ namespace BestRestaurants
     public void Test_Save_SavesToDataBase()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("French Restaurant",1);
+      Restaurant testRestaurant = new Restaurant("French Restaurant",1, "24 Main St.");
 
       //Act
       testRestaurant.Save();
@@ -56,7 +56,7 @@ namespace BestRestaurants
     public void Test_Save_AssignIdToObjects()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("Cactus", 2);
+      Restaurant testRestaurant = new Restaurant("Cactus", 2, "24 Main St.");
 
       testRestaurant.Save();
       Restaurant savedRestaurant = Restaurant.GetAll()[0];
@@ -71,7 +71,7 @@ namespace BestRestaurants
     public void Test_Find_FindsRestaurantInDatabase()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("Le Fromage", 1);
+      Restaurant testRestaurant = new Restaurant("Le Fromage", 1, "24 Main St.");
       testRestaurant.Save();
 
       //Act
@@ -85,7 +85,7 @@ namespace BestRestaurants
     public void Test_DeleteRestaurant_DeleteRestaurantFromDatabase()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("Le Fromage", 1);
+      Restaurant testRestaurant = new Restaurant("Le Fromage", 1, "24 Main St.");
 
       //Act
       testRestaurant.Save();
@@ -102,15 +102,16 @@ namespace BestRestaurants
     public void Test_Update_UpdateRestaurantInDatabase()
     {
       string RestaurantName = "Le Rmoges";
-      Restaurant testRestaurant = new Restaurant(RestaurantName, 2);
+      Restaurant testRestaurant = new Restaurant(RestaurantName, 2, "24 MAIN St.");
       testRestaurant.Save();
 
       string newRestaurantName ="Le Fromage";
       int newCuisineId = 1;
+      string newAddress = "24 Main St.";
 
-      testRestaurant.Update(newRestaurantName, newCuisineId);
+      testRestaurant.Update(newRestaurantName, newCuisineId, newAddress);
       Restaurant actualResult = testRestaurant;
-      Restaurant expectedResult = new Restaurant(newRestaurantName, newCuisineId, testRestaurant.GetId());
+      Restaurant expectedResult = new Restaurant(newRestaurantName, newCuisineId, newAddress, testRestaurant.GetId());
 
       Assert.Equal(expectedResult,actualResult);
     }

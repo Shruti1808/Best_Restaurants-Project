@@ -4,6 +4,7 @@
 
 <h1>@Model["restaurant"].GetRestaurantName()</h1>
 <h2>@Model["cuisine"].GetCuisineName()</h2>
+<h3>Address: @Model["restaurant"].GetAddress()</h3>
 
 <p><a href="/cuisines/@Model["cuisine"].GetId()/restaurants/@Model["restaurant"].GetId()/delete">Delete </a></p>
 <p><a href="/cuisines/@Model["cuisine"].GetId()/restaurants/@Model["restaurant"].GetId()/update">Update</a></p>

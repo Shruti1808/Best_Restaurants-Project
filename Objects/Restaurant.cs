@@ -214,7 +214,7 @@ namespace BestRestaurants
       newRestaurantNameParameter.ParameterName = "@newRestaurantName";
 
       //If there is a new restaurant name, change it
-      if (newRestaurantName != null)
+      if (!String.IsNullOrEmpty(newRestaurantName))
       {
         newRestaurantNameParameter.Value = newRestaurantName;
       }
@@ -246,7 +246,7 @@ namespace BestRestaurants
       newAddressParameter.ParameterName = "@newAddress";
 
       //If there is a new restaurant name, change it
-      if (newAddress != null)
+      if (!String.IsNullOrEmpty(newAddress))
       {
         newAddressParameter.Value = newAddress;
       }

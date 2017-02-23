@@ -122,12 +122,14 @@ namespace BestRestaurants
     {
       //Arrange
       Cuisine testCuisine = new Cuisine ("French Cuisine");
-      Restaurant firstRestaurant = new Restaurant("Le Fromage", 1);
-      Restaurant secondRestaurant = new Restaurant("Le Pichet", 1);
-      Restaurant thirdRestaurant = new Restaurant("La Menagerie", 1);
+      testCuisine.Save();
+
+      Restaurant firstRestaurant = new Restaurant("Le Fromage", testCuisine.GetId());
+      Restaurant secondRestaurant = new Restaurant("Le Pichet", testCuisine.GetId());
+      Restaurant thirdRestaurant = new Restaurant("La Menagerie", testCuisine.GetId());
 
       //Act
-      testCuisine.Save();
+      // Console.WriteLine(testCuisine.GetId());
       firstRestaurant.Save();
       secondRestaurant.Save();
       thirdRestaurant.Save();

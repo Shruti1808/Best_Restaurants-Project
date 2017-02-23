@@ -124,9 +124,9 @@ namespace BestRestaurants
       Cuisine testCuisine = new Cuisine ("French Cuisine");
       testCuisine.Save();
 
-      Restaurant firstRestaurant = new Restaurant("Le Fromage", testCuisine.GetId(), "24 Main St.");
-      Restaurant secondRestaurant = new Restaurant("Le Pichet", testCuisine.GetId(), "5 First St.");
-      Restaurant thirdRestaurant = new Restaurant("La Menagerie", testCuisine.GetId(), "155 Spring St.");
+      Restaurant firstRestaurant = new Restaurant("Le Fromage", testCuisine.GetId(), "24 Main St.", "10AM", "11PM");
+      Restaurant secondRestaurant = new Restaurant("Le Pichet", testCuisine.GetId(), "5 First St.", "10AM", "11PM");
+      Restaurant thirdRestaurant = new Restaurant("La Menagerie", testCuisine.GetId(), "155 Spring St.", "10AM", "11PM");
 
       //Act
       // Console.WriteLine(testCuisine.GetId());

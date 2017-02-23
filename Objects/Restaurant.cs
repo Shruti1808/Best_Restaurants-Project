@@ -234,7 +234,7 @@ namespace BestRestaurants
       conn.Open();
 
       //new command to change any changed fields
-      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET restaurant_name = @newRestaurantName, cuisine_id = @newCuisineId, address = @newAddress, open_time = @openTime, close_time = @closeTime OUTPUT INSERTED.restaurant_name, INSERTED.cuisine_id, INSERTED.address, INSERTED.open_time, INSERTED.close_time WHERE id = @RestaurantId;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET restaurant_name = @newRestaurantName, cuisine_id = @newCuisineId, address = @newAddress, open_time = @newOpenTime, close_time = @newCloseTime OUTPUT INSERTED.restaurant_name, INSERTED.cuisine_id, INSERTED.address, INSERTED.open_time, INSERTED.close_time WHERE id = @RestaurantId;", conn);
 
       //Get id of restaurant to use in command
       SqlParameter restaurantIdParameter = new SqlParameter();

@@ -3,6 +3,12 @@
 }
 
 <h1>@Model.GetCuisineName()</h1>
+<ul>
+  @foreach (var restaurant in @Model.GetRestaurants())
+  {
+    <li><a href="/cuisines/@Model.GetId()/restaurants/@restaurant.GetId()">@restaurant.GetRestaurantName()</a></li>
+  }
+</ul>
 
 <p><a href="/cuisines/delete/@Model.GetId()">Delete this Cuisine</a></p>
 <p><a href="/cuisines/update/@Model.GetId()">Edit this Cuisine</a></p>

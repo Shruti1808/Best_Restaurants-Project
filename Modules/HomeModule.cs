@@ -82,6 +82,21 @@ namespace BestRestaurants
         // List<Restaurant> CuisineRestaurants = currentCuisine.GetRestaurants();
         return View["cuisine.cshtml", currentCuisine];
       };
+
+      Get["/cuisines/{cuisineId}/restaurants/{id}/update"] = parameters => {
+        Restaurant currentRestaurant = Restaurant.Find(parameters.id);
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        Dictionary<string, object> model = new Dictionary<string, object>(){{"restaurant", currentRestaurant}, {"cuisines", allCuisines}};
+        return View["restaurant_update.cshtml", model];
+      };
+
+      Patch["/cuisines/{cuisineId}/restaurants/{id}/update"] = parameters => {
+        Restaurant currentRestaurant = Restaurant.Find(parameters.id);
+        currentRestaurant.Update(Request.Form["restaurant-name"], Request.Form["cuisine-name"]);
+        Cuisine currentCuisine = Cuisine.Find(currentRestaurant.GetCuisineId());
+        Dictionary<string, object> model = new Dictionary<string, object>{{"restaurant", currentRestaurant},{"cuisine", currentCuisine}};
+        return View["restaurant_info.cshtml", model];
+      };
     }
   }
 }

@@ -2,11 +2,11 @@
   Layout="Shared/_Layout.cshtml";
 }
 
-<h1>Update information for @Model.GetCuisineName()</h1>
+<h1>Update information for @Model["restaurant"].GetCuisineName()</h1>
 
-<form action="/cuisines/update/@Model.GetId()" method="post">
+<form action="/cuisines/update/@Model["restaurant"].GetId()" method="post">
   <input type="hidden" name="_method" value="PATCH">
-  <input type="hidden" name="cuisine-id" value="@Model.GetId()">
+  <input type="hidden" name="cuisine-id" value="@Model["restaurant"].GetId()">
   <label for="cuisine-name">New Name:</label>
   <input type="text" name="cuisine-name">
   <button type="submit">Submit Change</button>

@@ -1,0 +1,21 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<h1>Update information for @Model["restaurant"].GetRestaurantName()</h1>
+
+<form action="/cuisines/@Model["restaurant"].GetCuisineId()/restaurants/@Model["restaurant"].GetId()/update" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <input type="hidden" name="cuisine-id" value="@Model["restaurant"].GetCuisineId()">
+  <input type="hidden" name="restaurant-id" value="@Model["restaurant"].GetId()">
+  <label for="restaurant-name">Change Restaurant Name:</label>
+  <input type="text" name="restaurant-name">
+  <label for="restaurant-name">Change Cuisine:</label>
+  <select name="cuisine-name">
+    @foreach (var cuisine in @Model["cuisines"])
+    {
+      <option value="@cuisine.GetId()">@cuisine.GetCuisineName()</option>
+    }
+  </select>
+  <button type="submit" name="button">Submit Changes</button>
+</form>

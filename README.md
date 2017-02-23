@@ -79,6 +79,10 @@ This website will let users enter and save movies along with affiliated actors a
 * Example Input: "Le Fromage"
 * Example Output: "Error: This restaurant is already on the list"
 
+**When the user changes the restaurant's cuisine, the update method for restaurants will return the updated cuisine**
+* Example Input: "French Cuisine: Le Fromage"
+* Example Output: "Mexican Comida: Le Fromage"
+
 ## Support and contact details
 
 Please contact Allie Holcombe at alexandra.holcombe@gmail.com, Renee Mei at dontemailme@dontemailme.com, or Shruti Priya at shrutipriya1808@gmail.com with any questions, concerns, or suggestions.

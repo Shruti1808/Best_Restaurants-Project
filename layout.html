@@ -5,6 +5,21 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
   <link rel="stylesheet" href="Content/css/styles.css">
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js" charset="utf-8"></script>
+  <script src="Content/js/jquery.als-1.7.min.js" charset="utf-8"></script>
+  <script src="Content/js/scripts.js" charset="utf-8"></script>
+  <script type="text/javascript">
+	$(document).ready(function(){
+    $("#demo3").als({
+	visible_items: 5,
+	scrolling_items: 2,
+	orientation: "vertical",
+	circular: "yes",
+	autoscroll: "yes",
+	interval: 2000
+});
+	});
+</script>
   <title>Best Restaurants</title>
 </head>
 <body>
@@ -17,20 +32,35 @@
       </div>
 
       <div class="col-md-8" id="right">
-        <h1>Best Restaurants in Town</h1>
-        <ul>
-          @foreach(var cuisine in @Model)
-          {
-            <li><a href="/cuisines/@cuisine.GetId()">@cuisine.GetCuisineName()</a></li>
-          }
-        </ul>
+        <div class="als-container" id="demo3">
+          <span class="als-prev">Up</span>
+          <div class="als-viewport">
+            <ul class = "list-unstyled als-wrapper" id = "cuisine-list">
+              <li class="als-item">French Cuisine</li>
+              <li class="als-item">Mexican Food</li>
+              <li class="als-item">American Classics</li>
+              <li class="als-item">Italian Eateries</li>
+              <li class="als-item">Pizzerias</li>
+              <li class="als-item">Greek Fusion</li>
+              <li class="als-item">Chinese Takeout</li>
+              <li class="als-item">Sushi</li>
+              <li class="als-item">Ramen</li>
+              <li class="als-item">Korean Barbeque</li>
+              <li class="als-item">Vietnamese Pho</li>
+              <li class="als-item">Indian Tandoori</li>
+              <li class="als-item">Gastro-Pubs</li>
+              <li class="als-item">Salads</li>
+              <li class="als-item">Smoothies</li>
+            </ul>
+          </div>
+                    <span class="als-next">Down</span>
+        </div>
         <form action="/cuisine/new" method="post">
           <label for="cuisine-name">Enter New Cuisine:</label>
           <input type="text" name="cuisine-name">
           <button type="submit">Add</button>
         </form>
       </div>
-
     </div>
   </div>
 </body>

@@ -34,12 +34,74 @@ body{
 
 #right {
   border: 2px red solid;
+  margin-top:24%;
+  height:50vh;
+}
+
+#cuisine-list {
+  margin-left: 20px;
+  font-size: 36px;
+}
+
+.als-container {
+	position: relative;
+	width: 100%;
+	/*margin: 0px auto;*/
+	z-index: 0;
+}
+
+.als-viewport {
+	position: relative;
+	overflow: hidden;
+	/*margin: 0px auto;*/
+}
+
+/*.als-wrapper {
+	position: relative;
+	list-style: none;
+}*/
+
+.als-item {
+	position: relative;
+	display: block;
+	/*text-align: center;*/
+	cursor: pointer;
+	float: left;
+}
+
+/*.als-prev, .als-next {
+	position: absolute;
+	cursor: pointer;
+	clear: both;
+}*/
+
+/*#demo3 {
+	margin: 40px auto;
+}*/
+
+#demo3 .als-item {
+	margin: 0px 5px;
+	padding: 4px 0px;
+	min-height: 120px;
+	min-width: 200px;
+}
+
+/*#demo3 .als-prev, #demo3 .als-next {
+	top: 40px;
+}*/
+
+#demo3 .als-prev {
+	left: 200px;
+}
+
+#demo3 .als-next {
+	right: 200px;
 }
 
 .container {
   width: 50%;
   max-width: 900px;
-  margin-left: 15%;
+  /*margin-left: 15%;*/
   background-color: #fff;
   position:absolute;
   top:0;
@@ -49,4 +111,12 @@ body{
   overflow:hidden;
   z-index:-1;
   padding: 0;
+}
+
+ul {
+  width: 500px;
+}
+
+.als-viewport div {
+  width: 500px;
 }
